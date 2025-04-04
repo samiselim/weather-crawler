@@ -84,3 +84,22 @@ resource "helm_release" "cert_manager" {
     value = "true"
   }
 }
+resource "helm_release" "rancher" {
+  name             = "rancher"
+  repository       = "https://releases.rancher.com/server-charts/latest"
+  chart            = "rancher"
+  namespace        = "cattle-system"
+  create_namespace = true
+
+  set {
+    name  = "hostname"
+    value = "rancher.localhost" # Replace with your actual domain or leave like this for now
+  }
+
+  set {
+    name  = "replicas"
+    value = "1"
+  }
+
+  depends_on = [helm_release.cert_manager]
+}
