@@ -102,5 +102,5 @@ resource "helm_release" "rancher" {
     value = "1"
   }
 
-  depends_on = [helm_release.cert_manager]
+  # depends_on = [helm_release.cert_manager]
 }
