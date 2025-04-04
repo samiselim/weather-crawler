@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket = "challenge-statefile-bucket"
     key = "challenge-statefile"
-    region = "eu-west-3"
+    region = "eu-west-1"
   }
 }
 # resource "aws_key_pair" "this" {
