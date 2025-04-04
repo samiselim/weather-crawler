@@ -83,6 +83,7 @@ resource "helm_release" "cert_manager" {
     name  = "crds.enabled"
     value = "true"
   }
+  timeout = 600
 }
 resource "helm_release" "rancher" {
   name             = "rancher"
