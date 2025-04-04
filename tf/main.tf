@@ -101,6 +101,10 @@ resource "helm_release" "rancher" {
     name  = "replicas"
     value = "1"
   }
+  set {
+    name  = "ingress.ingressClassName"
+    value = "nginx"
+  }
 
   # depends_on = [helm_release.cert_manager]
 }
