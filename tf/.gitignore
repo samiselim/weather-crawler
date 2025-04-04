@@ -1,0 +1,9 @@
+.venv
+.env
+challenge-key.pem
+.terraform
+.terraform.lock.hcl
+kubeconfig
+terraform.tfstate*
+challenge-key.pem
+kubeconfig
