@@ -1,10 +1,10 @@
-# terraform {
-#   backend "s3" {
-#     bucket = "challenge-statefile-bucket"
-#     key = "challenge-statefile"
-#     region = "eu-west-3"
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket = "challenge-statefile-bucket"
+    key = "challenge-statefile"
+    region = "eu-west-3"
+  }
+}
 # resource "aws_key_pair" "this" {
 #   key_name   = "challenge-key"
 #   public_key = file(var.public_key_path)
