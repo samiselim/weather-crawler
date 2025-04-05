@@ -222,34 +222,44 @@ resource "helm_release" "mongodb" {
 }
 
 resource "helm_release" "airflow" {
-  name             = "airflow"
-  repository       = "https://airflow.apache.org"
-  chart            = "airflow"
-  namespace        = "airflow"
+  name       = "airflow"
+  repository = "https://airflow.apache.org"
+  chart      = "airflow"
+  namespace  = "airflow"
   create_namespace = true
 
   set {
     name  = "executor"
-    value = "LocalExecutor"
+    value = "CeleryExecutor"
   }
 
   set {
-    name  = "webserver.defaultUser.username"
-    value = "admin"
+    name  = "postgresql.enabled"
+    value = "true"
   }
 
   set {
-    name  = "webserver.defaultUser.password"
-    value = "admin"
+    name  = "postgresql.postgresqlDatabase"
+    value = "airflow"
   }
 
   set {
-    name  = "webserver.service.type"
-    value = "NodePort"
+    name  = "postgresql.postgresqlUsername"
+    value = "airflow"
   }
 
   set {
-    name  = "webserver.service.nodePort.http"
-    value = "30808"
+    name  = "postgresql.postgresqlPassword"
+    value = "airflow_password"
+  }
+
+  set {
+    name  = "redis.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "redis.password"
+    value = "redis_password"
   }
 }
