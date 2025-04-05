@@ -19,11 +19,11 @@ provider "aws" {
 }
 provider "helm" {
   kubernetes {
-    config_path = "kubeconfig"
+    config_path = "/etc/rancher/rke2/rke2.yaml"
   }
 }
 provider "kubernetes" {
-  config_path = "kubeconfig"
+  config_path = "/etc/rancher/rke2/rke2.yaml"
 }
 
 # ------------ variables.tf ------------
