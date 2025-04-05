@@ -239,17 +239,17 @@ resource "helm_release" "airflow" {
   }
 
   set {
-    name  = "postgresql.postgresqlDatabase"
-    value = "airflow"
+    name  = "postgresql.auth.postgresPassword"
+    value = "your-postgres-password"
   }
 
   set {
-    name  = "postgresql.postgresqlUsername"
-    value = "airflow"
+    name  = "postgresql.auth.username"
+    value = "airflow_user"
   }
 
   set {
-    name  = "postgresql.postgresqlPassword"
+    name  = "postgresql.auth.password"
     value = "airflow_password"
   }
 
@@ -263,3 +263,4 @@ resource "helm_release" "airflow" {
     value = "redis_password"
   }
 }
+
