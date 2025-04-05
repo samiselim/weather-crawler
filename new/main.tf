@@ -218,4 +218,38 @@ resource "helm_release" "mongodb" {
     name  = "persistence.size"
     value = "1Gi"
   }
+  timeout = 600
+}
+
+resource "helm_release" "airflow" {
+  name             = "airflow"
+  repository       = "https://airflow.apache.org"
+  chart            = "airflow"
+  namespace        = "airflow"
+  create_namespace = true
+
+  set {
+    name  = "executor"
+    value = "LocalExecutor"
+  }
+
+  set {
+    name  = "webserver.defaultUser.username"
+    value = "admin"
+  }
+
+  set {
+    name  = "webserver.defaultUser.password"
+    value = "admin"
+  }
+
+  set {
+    name  = "webserver.service.type"
+    value = "NodePort"
+  }
+
+  set {
+    name  = "webserver.port"
+    value = "8080"
+  }
 }
