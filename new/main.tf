@@ -150,6 +150,11 @@ resource "helm_release" "cert_manager" {
     name  = "crds.enabled"
     value = "true"
   }
+   set {
+    name  = "startupapicheck.enabled"
+    value = "false"
+  }
+  timeout = 600
 }
 
 resource "null_resource" "wait_for_cert_manager" {
