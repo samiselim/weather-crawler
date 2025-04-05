@@ -193,7 +193,7 @@ resource "helm_release" "rancher" {
 
 resource "helm_release" "mongodb" {
   name       = "mongodb"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = "oci://registry-1.docker.io/bitnamicharts"
   chart      = "mongodb"
   version    = "16.4.12" 
   namespace  = "mongodb"
