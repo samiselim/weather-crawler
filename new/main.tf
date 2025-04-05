@@ -185,6 +185,8 @@ resource "helm_release" "rancher" {
     name  = "ingress.ingressClassName"
     value = "nginx"
   }
+  wait    = true
+  timeout = 600
 
   depends_on = [null_resource.wait_for_cert_manager]
 } 
