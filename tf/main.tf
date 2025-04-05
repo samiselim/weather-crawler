@@ -72,6 +72,8 @@ module "worker" {
               systemctl start rke2-agent
             EOF
 }
+
+
 resource "helm_release" "cert_manager" {
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"
@@ -83,7 +85,12 @@ resource "helm_release" "cert_manager" {
     name  = "crds.enabled"
     value = "true"
   }
-  timeout = 600
+}
+resource "null_resource" "wait_for_cert_manager" {
+  provisioner "local-exec" {
+    command = "echo '🕐 Waiting for cert-manager webhook to settle...'; sleep 60"
+  }
+  depends_on = [helm_release.cert_manager]
 }
 resource "helm_release" "rancher" {
   name             = "rancher"
@@ -94,17 +101,18 @@ resource "helm_release" "rancher" {
 
   set {
     name  = "hostname"
-    value = "rancher.localhost" # Replace with your actual domain or leave like this for now
+    value = "rancher.localhost" # Replace with real domain later if needed
   }
 
   set {
     name  = "replicas"
     value = "1"
   }
+
   set {
     name  = "ingress.ingressClassName"
     value = "nginx"
   }
 
-  # depends_on = [helm_release.cert_manager]
+  depends_on = [null_resource.wait_for_cert_manager]
 }
