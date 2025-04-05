@@ -190,3 +190,31 @@ resource "helm_release" "rancher" {
 
   depends_on = [null_resource.wait_for_cert_manager]
 } 
+
+resource "helm_release" "mongodb" {
+  name       = "mongodb"
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "mongodb"
+  namespace  = "mongodb"
+  create_namespace = true
+
+  set {
+    name  = "auth.enabled"
+    value = "false"
+  }
+
+  set {
+    name  = "architecture"
+    value = "standalone"
+  }
+
+  set {
+    name  = "persistence.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "persistence.size"
+    value = "1Gi"
+  }
+}
