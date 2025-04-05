@@ -108,3 +108,16 @@ resource "helm_release" "rancher" {
 
   # depends_on = [helm_release.cert_manager]
 }
+resource "rke2_cluster" "challenge" {
+  name = "example-cluster"
+  nodes = [
+    {
+      role = "control-plane"
+      count = 1
+    },
+    {
+      role = "worker"
+      count = 1
+    }
+  ]
+}
