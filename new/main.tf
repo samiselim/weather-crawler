@@ -249,7 +249,7 @@ resource "helm_release" "airflow" {
   }
 
   set {
-    name  = "webserver.port"
-    value = "8080"
+    name  = "webserver.service.nodePort.http"
+    value = "30808"
   }
 }
